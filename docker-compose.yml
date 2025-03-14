@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  laravel_app:
+    build:
+      context: ./aplicacion/centro-medico
+      dockerfile: Dockerfile
+    container_name: laravel_app
+    ports:
+      - "8080:80"
+    networks:
+      - laravel_network
+    volumes:
+      - ./env/msv-centro-medico/.env:/var/www/html/.env
+      - ./aplicacion/centro-medico:/var/www/html
+    restart: unless-stopped
+
+networks:
+  laravel_network:
+    driver: bridge
